@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Covid in the USA</title>
+    <link rel="shortcut icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+        integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+        crossorigin="anonymous"></script>
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.3/dist/leaflet.css"
+        integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ=="
+        crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.3.3/dist/leaflet.js"
+        integrity="sha512-tAGcCfR4Sc5ZP5ZoVz0quoZDYX5aCtEm/eu1KhSLj2c9eFrylXZknQYmxUssFaVJKvvc0dJQixhGjG2yXWiV9Q=="
+        crossorigin=""></script>
+    <script src="{{ url_for('static', filename='js/jquery-1.11.1.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/jquery-ui.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/jquery.select-to-autocomplete.js') }}"></script>
+    <!--For Mapbox GL to work -->
+    <script src='https://api.mapbox.com/mapbox-gl-js/v1.11.1/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v1.11.1/mapbox-gl.css' rel='stylesheet' />
+
+
+
+    <!--MODIFIED THE HREF FOR THE CSS FILE-->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+    <nav class="nonburger navbar navbar-expand-lg navbar-light">
+        <a class="navbar-data-links mr-auto" href="{{ url_for('home') }}">
+            <h1 id="logo"><strong>COVID in the United States</strong></h1>
+        </a>
+        <a class='navbar-data-links mr-auto' href="{{ url_for('about_index') }}">
+            <h3 href="{{ url_for('about_index') }}">About</h3>
+        </a>
+    </nav>
+    <!-- Hamburger -->
+    <nav class="hamburger navbar navbar-light">
+        <a class="navbar-brand" id='logo' href="#">Cause of Death by Gender (Africa)</a>
+        <button class="hamburger navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+            aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class='navbar-data-links mr-auto' href="{{ url_for('home') }}">
+                        <h3>State/County Data</h3>
+                    </a>
+                </li>
+                <li class="nav-item active">
+                    <a class='navbar-data-links mr-auto' href="{{ url_for('honey_index') }}">
+                        <h3 href="{{ url_for('honey_index') }}">Data Comparison and Integrity</h3>
+                    </a>
+                </li>
+                <li class="nav-item active">
+                    <a class='navbar-data-links mr-auto' href="{{ url_for('about_index') }}">
+                        <h3 href="{{ url_for('about_index') }}">About Us</h3>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <!-- End Hamburger -->
+    <div class='row'>
+        <div class='card-deck'>     
+
+        
+            <div class='card' id='clemi-bio'>
+                <img src="../static/headshot_clemi1.jpg" alt="Clementine-Sraha" style=width:100%>
+                <div class='card-block'><br>
+                    <div class='container'>
+                        <h3 class='card-title'>Clementine Sraha</h3>
+                        <hr>
+                        <p class='card-text'>Clementine is Data Analyst with a B.Sc. in Environmental Science from Drexel University and a
+                            Masters Degree in Environmental Management from the Nicholas School of Environment at Duke
+                            University. Clementine loves coding and likes to learn new things in her free time. You can view
+                            Clementine’s LinkedIn <a href='https://www.linkedin.com/in/clementine-sraha/'>here</a><br>
+                        </p>
+                    </div>
+
+                </div>
+            </div>              
+        
+        </div>
+    </div>
+
+    <div class='row'>
+        <div class='card'>
+            <div class='card-block'>
+                
+                    <h3 class='card-title container'>Sources</h3>
+                    <hr>
+                    <ul class='card-text'>
+                        <li>test</li>
+                        <li>test</li>
+                        <li>test</li>
+                    </ul>
+                    <p> * Note:World bank API, 2016 data</p>
+                
+            </div>
+        </div>
+    </div>
+
+    
+</body>
+
+<!-- Start of footer -->
+<footer class="footer navbar-fixed-bottom">
+    <div class="two-toned-footer-color"></div>
+    <p class="text-muted text-muted-footer text-center">
+        <br><br>
+    </p>
+</footer>
+<!-- End of footer -->
+
+</html>

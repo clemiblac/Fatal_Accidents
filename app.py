@@ -54,12 +54,19 @@ mongo = PyMongo(app)
 #@cache.cached(timeout=18000)
 def home():
     return render_template("index.html")
+
+@app.route("/predictions")
+#@cache.cached(timeout=18000)
+def predictions():
+    return render_template("predictions.html")
     
 
 @app.route("/about")
 #@cache.cached(timeout=18000)
 def about():
     return render_template("about.html")
+
+
 
 
 

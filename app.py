@@ -67,9 +67,6 @@ def about():
     return render_template("about.html")
 
 
-
-
-
 @app.route("/data/fatal")
 #@cache.cached(timeout=18000)
 def fatal():

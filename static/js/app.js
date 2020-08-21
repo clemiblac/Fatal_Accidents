@@ -5,7 +5,7 @@ var accidents="/data/fatal";
 
 //////////////HHHHHHH///////////
 d3.json(accidents).then((data)=>{
-    //console.log(data);
+    console.log(data);
     /// Heat map ///
     
     /// Day of the week ///
@@ -23,9 +23,9 @@ d3.json(accidents).then((data)=>{
 
 
     var day=Object.keys(result)
-    console.log(day)
+    //.log(day)
     var count_crashes=Object.values(result)
-    console.log(count_crashes)
+    //console.log(count_crashes)
 
 
 
@@ -59,7 +59,7 @@ d3.json(accidents).then((data)=>{
     //console.log(sort_weekday)
 
     var count_deaths=sort_weekday.map(t=>t.DEATHS)
-    console.log(count_deaths)
+    //console.log(count_deaths)
 
   
     var trace1 = {
@@ -76,7 +76,7 @@ d3.json(accidents).then((data)=>{
         type: 'scatter'
       };
       
-      var data = [trace1, trace2];
+      var line_data = [trace1, trace2];
 
       var layout = {
         title: {
@@ -121,11 +121,30 @@ d3.json(accidents).then((data)=>{
             },  
         
         }
-        }
-        var config = {responsive: true};
+    }
+    var config = {responsive: true};
       
-      Plotly.newPlot('day-of-week', data,layout,config);
+    Plotly.newPlot('day-of-week', line_data,layout,config);
 
+    /////////// Time of day
+    var time_day=data.map(t=>t.HOUR)
+    console.log(time_day)
+    var result1 = { };
+    for(var i = 0; i < time_day.length; ++i) {
+        if(!result1[time_day[i]])
+            result1[time_day[i]] = 0;
+        ++result1[time_day[i]];
+    }
+    //console.log(result1)
+
+
+    var hour_t=Object.keys(result1)
+    console.log(hour_t)
+    var count_crashes_time=Object.values(result1)
+    console.log(count_crashes_time)
+
+
+  
     
 
 

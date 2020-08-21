@@ -13,6 +13,17 @@
         <!-- Plotly -->
         <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+        <!-- Google Fonts -->
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+        <!-- Bootstrap core CSS -->
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
+        <!-- Material Design Bootstrap -->
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/css/mdb.min.css" rel="stylesheet">
+            
+
+
         <title>Fatal Accidents Dashboard</title>
         <link rel="shortcut icon" type="image/x-icon" href="{{ url_for('static', filename='crash.png') }}">
     </head>
@@ -45,22 +56,28 @@
             <!--End of First Row-->
             <!-- Second Row-->
             <div class="row">
-                <div class="col" id="h">
-                    Days of the week
+                <!--<h6>Days of the week</h6>-->
+                <div class="col" id="day-of-week">
+                   
                 </div>
-                <div class="col">
-                    Time of the day
+
+                <div class="col" id="myDiv">
+                    <!--Time of the day-->
+                    
                 </div>
-                <div class="col">
-                    Day of the week and time of the day 3d
-                </div>
-                <div class="col">
-                    Rural and Urban
-                </div>
+
+               
             </div>
             <!--End of Second Row -->
             <!-- Third Row -->
             <div class="row">
+                <div class="col">
+                    Day of the week and time of the day 3d
+                </div>
+
+                <div class="col">
+                    Rural and Urban
+                </div>
                 <div class="col">
                     Light conditions
                 </div>
@@ -87,6 +104,16 @@
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    
+        <!-- JQuery -->
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <!-- Bootstrap tooltips -->
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
+        <!-- Bootstrap core JavaScript -->
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.min.js"></script>
+        <!-- MDB core JavaScript -->
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/js/mdb.min.js"></script>
+
     </body>
         
     <!-- Start of footer -->

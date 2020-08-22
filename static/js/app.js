@@ -7,7 +7,30 @@ var accidents="static/js/fatal_accidents.json";
 d3.json(accidents).then((data)=>{
 
     console.log(data)
-        /// Map ///
+    /// Map ///--Not representative of all accidents because not all accidents had
+    //lat lon reported
+    //Remove cases where lat and long where not reported
+    coordinates1=data.filter(c=>c.LATITUDE!=99.9999000)
+    coordinates2=coordinates1.filter(c=>c.LATITUDE!=77.7777000)
+    console.log(coordinates2)
+    var latitude=coordinates2.map(t=>t.LATITUDE)
+    var longitude=coordinates2.map(t=>t.LONGITUD)
+    var fatalities=coordinates2.map(t=>t.FATALS)
+
+
+    var mapdata = [{type: 'densitymapbox', lon: longitude, lat:latitude, z:fatalities}];
+
+    var layout = {
+    mapbox: {center: {lon: -90, lat: 37}, style: 'stamen-terrain', zoom: 2},
+    coloraxis: {colorscale: "Viridis"}, title: {text: "Vehicle Fatalities"},
+    width: 900, height: 400, margin: {t: 30, b: 0}};
+
+    
+    Plotly.newPlot('myMap', mapdata, layout);
+
+
+
+
     // var map_result = [];
     // data.reduce(function(res, value) {
     // if (!res[value.STATE_NAME]) {
@@ -27,7 +50,7 @@ d3.json(accidents).then((data)=>{
 
     /////////// Time of day
     var time_day=data.map(t=>t.HOUR)
-    console.log(time_day)
+    //console.log(time_day)
     var result1 = { };
     for(var i = 0; i < time_day.length; ++i) {
         if(!result1[time_day[i]])
@@ -81,44 +104,28 @@ d3.json(accidents).then((data)=>{
     //First filter dataset by gender
     male=data.filter(c=>c.SEX==1)
     female=data.filter(c=>c.SEX==2)
-    console.log("male")
+    //console.log("male")
     //console.log(male)
 
     /// Males 
     male0_16=male.filter(c=>c.AGE<=16).length
-    console.log(male0_16)
     male17_20=male.filter(c=>c.AGE>=17&&c.AGE<=20).length
-    console.log(male17_20)
     male21_25=male.filter(c=>c.AGE>=21&&c.AGE<=25).length
-    console.log(male21_25)
     male26_30=male.filter(c=>c.AGE>=26&&c.AGE<=30).length
-    console.log(male26_30)
     male31_35=male.filter(c=>c.AGE>=31&&c.AGE<=35).length
-    console.log(male31_35)
     male36_40=male.filter(c=>c.AGE>=36&&c.AGE<=40).length
-    console.log(male36_40)
     male41_45=male.filter(c=>c.AGE>=41&&c.AGE<=45).length
-    console.log(male41_45)
     male46_50=male.filter(c=>c.AGE>=46&&c.AGE<=50).length
-    console.log(male46_50)
     male51_55=male.filter(c=>c.AGE>=51&&c.AGE<=55).length
-    console.log(male51_55)
     male56_60=male.filter(c=>c.AGE>=56&&c.AGE<=60).length
-    console.log(male56_60)
     male61_65=male.filter(c=>c.AGE>=61&&c.AGE<=65).length
-    console.log(male61_65)
     male66_70=male.filter(c=>c.AGE>=66&&c.AGE<=70).length
-    console.log(male66_70)
     male71_plus=male.filter(c=>c.AGE>=71).length
-    console.log(male71_plus)
 
     /// Females
     female0_16=female.filter(c=>c.AGE<=16).length
-    console.log(female0_16)
     female17_20=female.filter(c=>c.AGE>=17&&c.AGE<=20).length
-    console.log(female17_20)
     female21_25=female.filter(c=>c.AGE>=21&&c.AGE<=25).length
-    console.log(female21_25)
     female26_30=female.filter(c=>c.AGE>=26&&c.AGE<=30).length
     female31_35=female.filter(c=>c.AGE>=31&&c.AGE<=35).length
     female36_40=female.filter(c=>c.AGE>=36&&c.AGE<=40).length
@@ -131,8 +138,6 @@ d3.json(accidents).then((data)=>{
     female71_plus=female.filter(c=>c.AGE>=71).length
 
 
-    console.log("Male 17-20")
-    console.log(male17_20)
 
     var chart = JSC.chart('gender-age', { 
         debug: true, 
@@ -211,7 +216,7 @@ d3.json(accidents).then((data)=>{
             light_result[light_conditions[i]] = 0;
         ++light_result[light_conditions[i]];
     }
-    console.log(light_result)
+    //console.log(light_result)
 
     /// Sum of fatalities by light conditions
     var lgt_fatalities_result = [];
@@ -224,7 +229,7 @@ d3.json(accidents).then((data)=>{
     return res;
     }, {});
 
-    console.log(lgt_fatalities_result)
+    //console.log(lgt_fatalities_result)
 
     /// Variables
     var l_condition=Object.keys(light_result)

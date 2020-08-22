@@ -18,34 +18,16 @@ d3.json(accidents).then((data)=>{
     var fatalities=coordinates2.map(t=>t.FATALS)
 
 
-    var mapdata = [{type: 'densitymapbox', lon: longitude, lat:latitude, z:fatalities}];
+    var mapdata = [{type: 'densitymapbox', lon: longitude, lat:latitude, z:fatalities,
+                    coloraxis: 'coloraxis',hoverinfo: 'skip',radius:5}];
 
     var layout = {
-    mapbox: {center: {lon: -90, lat: 37}, style: 'stamen-terrain', zoom: 2},
-    coloraxis: {colorscale: "Viridis"}, title: {text: "Vehicle Fatalities"},
+    mapbox: {center: {lon: -90, lat: 37}, style: 'stamen-terrain', zoom: 3},
+    coloraxis: {colorscale: "Viridis"}, 
+    title: {text: "Heat Map of Vehicle Fatalities in the United States"},
     width: 900, height: 400, margin: {t: 30, b: 0}};
 
-    
     Plotly.newPlot('myMap', mapdata, layout);
-
-
-
-
-    // var map_result = [];
-    // data.reduce(function(res, value) {
-    // if (!res[value.STATE_NAME]) {
-    //     res[value.STATE_NAME] = { STATE_NAME: value.STATE_NAME, FATALS: 0 };
-    //     map_result.push(res[value.STATE_NAME])
-    // }
-    // res[value.STATE_NAME].FATALS += value.FATALS;
-    // return res;
-    // }, {});
-
-    // console.log(map_result)
-    // var state=map_result.map(t=>t.STATE_NAME)
-    // var fatal_accidents=map_result.map(t=>t.FATALS)
-
-
 
 
     /////////// Time of day

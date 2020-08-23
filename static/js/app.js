@@ -28,9 +28,10 @@ d3.json(accidents).then((data)=>{
     width: 900, height: 400, margin: {t: 30, b: 0}};
 
     Plotly.newPlot('myMap', mapdata, layout);
+  
+   ///////////////                   TIME FACTORS                    //////////
 
-
-    /////////// Time of day
+    /////////// Time of day ///////////////////
     var time_day=data.map(t=>t.HOUR)
     //console.log(time_day)
     var result1 = { };
@@ -47,26 +48,76 @@ d3.json(accidents).then((data)=>{
     var count_crashes_time=Object.values(result1).slice(0,24)
     //console.log(count_crashes_time)
 
+    ////Day of the week 
+    var week_day=data.map(t=>t.DAY_WEEK)
+    //console.log(time_day)
+    var result2 = { };
+    for(var i = 0; i < week_day.length; ++i) {
+        if(!result2[week_day[i]])
+            result2[week_day[i]] = 0;
+        ++result2[week_day[i]];
+    }
+    console.log(result2)
+    var day_t=Object.keys(result2)
+    var count_crashes_day=Object.values(result2)
 
 
-    var data2 = [{
+    var data_hour = {
         type: 'bar',
         x: hour_t,
         y: count_crashes_time,
         marker:{color:'#FF6347'},
-    }];
+        visible:true
+    };
+
+    var data_day ={
+        type:'bar',
+        x:day_t,
+        y:count_crashes_day,
+        marker:{color:'#47ff5c'},
+        visible:false
+    };
+
+    var time_plots=[data_hour,data_day];
+
+
+    var updatemenus=[{
+        buttons: [   
+            {
+                args: [{visible: [true, false]}],
+                label: 'Hour of the day',
+                method: 'update'
+            },
+            {
+                args: [{visible: [false, true]}],
+                label:'Day of the week',
+                method:'update'
+               
+            }             
+        ],
+        direction: 'left',
+        pad: {'r': 10, 't': 10},
+        showactive: true,
+        type: 'buttons',
+        x: 0.15,
+        xanchor: 'left',
+        y: 1.1,
+        yanchor: 'top' 
+    }]
+
     var layout = {
-        xaxis: {title:"Hour of the day",
-            size: 14,
-            autotick: false,
-            //ticks: 'outside',
-            tick0: 0,
-            dtick: 1,
-            ticklen: 8,
-            tickwidth: 2,
-            tickangle: 45,
-            tickcolor: '#000'},
-        yaxis: {title:"Total crashes",automargin: true,},
+        updatemenus: updatemenus,
+        // xaxis: {title:"Hour of the day",
+        //     size: 14,
+        //     autotick: false,
+        //     //ticks: 'outside',
+        //     tick0: 0,
+        //     dtick: 1,
+        //     //ticklen: 8,
+        //     tickwidth: 2,
+        //     tickangle: 45,
+        //     tickcolor: '#000'},
+        // yaxis: {title:"Total crashes",automargin: true,},
         autosize: true,
         width: 500,
         height: 500,
@@ -74,12 +125,19 @@ d3.json(accidents).then((data)=>{
             l: 100,
             r: 50,
             b: 100,
-            t: 100,
+            t: 50,
             pad: 4
         }
     };
+
     var config = {responsive: true}           
-    Plotly.newPlot('time-of-day', data2,layout,config);
+    Plotly.newPlot('time-of-day', time_plots,layout,config);
+   
+
+    
+
+    
+       
 
     // /////////////////// GENDER //////////////////////////////
 

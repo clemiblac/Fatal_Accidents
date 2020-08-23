@@ -57,43 +57,70 @@ d3.json(accidents).then((data)=>{
             result2[week_day[i]] = 0;
         ++result2[week_day[i]];
     }
-    console.log(result2)
+    //console.log(result2)
     var day_t=Object.keys(result2)
     var count_crashes_day=Object.values(result2)
+
+    //// Month
+    var month=data.map(t=>t.MONTH)
+    //console.log(time_day)
+    var result3 = { };
+    for(var i = 0; i < month.length; ++i) {
+        if(!result3[month[i]])
+            result3[month[i]] = 0;
+        ++result3[month[i]];
+    }
+    console.log(result3)
+    var month_t=Object.keys(result3)
+    var count_crashes_month=Object.values(result3)
 
 
     var data_hour = {
         type: 'bar',
         x: hour_t,
         y: count_crashes_time,
-        marker:{color:'#FF6347'},
+        marker:{color:'#cefa87'},
         visible:true
     };
 
-    var data_day ={
+    var data_day = {
         type:'bar',
         x:day_t,
         y:count_crashes_day,
-        marker:{color:'#47ff5c'},
+        marker:{color:'#87cefa'},
         visible:false
     };
 
-    var time_plots=[data_hour,data_day];
+    var data_month = {
+        type:'bar',
+        x:month_t,
+        y:count_crashes_month,
+        marker:{color:'#FA8795'},
+        visible:false
+    };
+
+    var time_plots=[data_hour,data_day,data_month];
 
 
     var updatemenus=[{
         buttons: [   
             {
-                args: [{visible: [true, false]}],
-                label: 'Hour of the day',
+                args: [{visible: [true, false,false]}],
+                label: 'Hour ',
                 method: 'update'
             },
             {
-                args: [{visible: [false, true]}],
-                label:'Day of the week',
+                args: [{visible: [false, true,false]}],
+                label:'Weekday',
                 method:'update'
                
-            }             
+            },
+            {
+                args: [{visible: [false, false,true]}],
+                label:'Month',
+                method:'update'
+               
+            }               
         ],
         direction: 'left',
         pad: {'r': 10, 't': 10},
@@ -124,7 +151,7 @@ d3.json(accidents).then((data)=>{
         margin: {
             l: 100,
             r: 50,
-            b: 100,
+            b: 50,
             t: 50,
             pad: 4
         }

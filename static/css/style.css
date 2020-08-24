@@ -1,4 +1,10 @@
-
+body{
+    background-color:#d0d0d0;
+}
+#myMap{
+    margin-top:20px;
+    margin-bottom:15px;
+}
 #card-group{
     display: flex;
 }

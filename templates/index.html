@@ -25,11 +25,14 @@
         <!-- Material Design Bootstrap -->
         <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/css/mdb.min.css" rel="stylesheet">
             
-
+        <!--MODIFIED THE HREF FOR THE CSS FILE-->
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 
         <title>Fatal Accidents Dashboard</title>
         <link rel="shortcut icon" type="image/x-icon" href="{{ url_for('static', filename='crash.png') }}">
     </head>
+
+    
 
     <body>
 
@@ -48,8 +51,8 @@
                     </div>
                 </div>
         </nav>
+
         <div class="container">
-            
 
             <!--First Row-->
             <div class="row">

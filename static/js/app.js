@@ -163,9 +163,6 @@ d3.json(accidents).then((data)=>{
 
     
 
-    
-       
-
     // /////////////////// GENDER //////////////////////////////
 
     //First filter dataset by gender
@@ -298,43 +295,141 @@ d3.json(accidents).then((data)=>{
 
     //console.log(lgt_fatalities_result)
 
-    /// Variables
-    var l_condition=Object.keys(light_result)
-    var l_count_crashes=Object.values(light_result)
-    var l_count_deaths=lgt_fatalities_result.map(t=>t.FATALS)
-    var l_con_fatal=lgt_fatalities_result.map(t=>t.LGT_CONDITIONS)
+    /// Weather conditions
+     /// Count crashes by weather conditions
+    var weather_conditions=data.map(t=>t.WEATHER_COND)
+    var weather_result = { };
+    for(var i = 0; i < weather_conditions.length; ++i) {
+        if(!weather_result[weather_conditions[i]])
+            weather_result[weather_conditions[i]] = 0;
+        ++weather_result[weather_conditions[i]];
+    }
 
-    var trace1 = {
-        x: l_condition,
+    // Count of fatalities by weather conditions
+     var weather_fatalities_result = [];
+    data.reduce(function(res, value) {
+    if (!res[value.WEATHER_COND]) {
+        res[value.WEATHER_COND] = { WEATHER_CONDITIONS: value.WEATHER_COND, FATALS: 0 };
+        weather_fatalities_result.push(res[value.WEATHER_COND])
+    }
+    res[value.WEATHER_COND].FATALS += value.FATALS;
+    return res;
+    }, {});
+
+    /// Variables
+    var l_condition_crash=Object.keys(light_result)
+    var l_count_crashes=Object.values(light_result)
+    var l_con_fatal=lgt_fatalities_result.map(t=>t.LGT_CONDITIONS)
+    var l_count_deaths=lgt_fatalities_result.map(t=>t.FATALS)
+
+    var w_condition_crash=Object.keys(weather_result)
+    var w_count_crashes=Object.values(weather_result)
+    var w_con_fatal=weather_fatalities_result.map(t=>t.WEATHER_CONDITIONS)
+    var w_count_deaths=weather_fatalities_result.map(t=>t.FATALS)
+
+    console.log(weather_fatalities_result)
+    //console.log(w_count_deaths)
+
+    var light_crash = {
+        x: l_condition_crash,
         y: l_count_crashes,
-        name: 'crashes',
-        type: 'bar'
+        name: 'crashes (light)',
+        type: 'bar',
+        marker:{color:'#87fab3'},
+        visible:true
     };
     
-    var trace2 = {
+    var light_fatal = {
         x: l_con_fatal,
         y: l_count_deaths,
-        name: 'fatalities',
-        type: 'bar'
+        name: 'fatalities (light)',
+        type: 'bar',
+        marker:{color:'#87cefa'},
+        visible:true
+    };
+
+    var weather_crash = {
+        x: w_condition_crash,
+        y: w_count_crashes,
+        name: 'crashes (weather)',
+        type: 'bar',
+        marker:{color:'#fa87ce'},
+        visible:false
+    };
+
+      var weather_fatal = {
+        x: w_con_fatal,
+        y: w_count_deaths,
+        name: 'fatalities (weather)',
+        type: 'bar',
+        marker:{color:'#fab387'},
+        visible:false
     };
     
-    var light_data = [trace1, trace2];
-    
+    var env_plots = [light_crash, light_fatal,weather_crash,weather_fatal];
+
+
+
+
+    var updatemenus=[{
+        buttons: [   
+            {
+                args: [{visible: [true,true,false,false]}],
+                label: 'Light',
+                method: 'update'
+            },
+            {
+                args: [{visible: [false,false,true,true]}],
+                label:'Weather',
+                method:'update'
+               
+            },
+                         
+        ],
+        direction: 'left',
+        pad: {'r': 10, 't': 10},
+        showactive: true,
+        type: 'buttons',
+        x: 0.15,
+        xanchor: 'left',
+        y: 1.1,
+        yanchor: 'top' 
+    }]
+
     var layout = {barmode: 'group',
-        title: 'Light conditions',
+        updatemenus: updatemenus,
         autosize: true,
         width: 500,
         height: 500,
         margin: {
             l: 100,
             r: 50,
-            b: 100,
-            t: 100,
+            b: 50,
+            t: 50,
             pad: 4
         }
     };
+
+    var config = {responsive: true}           
+   
+
+    
+    // var layout = {barmode: 'group',
+    //     title: 'Weather conditions',
+    //       updatemenus: updatemenus,
+    //     autosize: true,
+    //     width: 500,
+    //     height: 500,
+    //     margin: {
+    //         l: 100,
+    //         r: 50,
+    //         b: 100,
+    //         t: 100,
+    //         pad: 4
+    //     }
+    // };
     var config = {responsive: true};
-    Plotly.newPlot('light', light_data, layout,config);
+    Plotly.newPlot('light', env_plots, layout,config);
 
 
   

@@ -76,10 +76,10 @@ d3.json(accidents).then((data)=>{
             result3[month[i]] = 0;
         ++result3[month[i]];
     }
-    console.log(result3)
+    //console.log(result3)
     var month_t=Object.keys(result3)
     var count_crashes_month=Object.values(result3)
-    console.log(day_t)
+    //console.log(day_t)
 
     var data_hour = {
         type: 'bar',
@@ -330,7 +330,7 @@ d3.json(accidents).then((data)=>{
     var w_con_fatal=weather_fatalities_result.map(t=>t.WEATHER_CONDITIONS)
     var w_count_deaths=weather_fatalities_result.map(t=>t.FATALS)
 
-    console.log(weather_fatalities_result)
+    //console.log(weather_fatalities_result)
     //console.log(w_count_deaths)
 
     var light_crash = {
@@ -434,30 +434,58 @@ d3.json(accidents).then((data)=>{
         ++vehicle_result[vehicle_crashes[i]];
     }
 
-    // Count of fatalities by weather conditions
-     var vehicle_fatalities_result = [];
-    data.reduce(function(res, value) {
-    if (!res[value.VMAKE]) {
-        res[value.VMAKE] = { VEHICLE_MAKE: value.VMAKE, FATALS: 0 };
-        weather_fatalities_result.push(res[value.VMAKE])
-    }
-    res[value.VMAKE].FATALS += value.FATALS;
-    return res;
-    }, {});
+    console.log(vehicle_result)
 
-    var manufacturer_c=Object.keys(vehicle_result)
-    var crashes_by_manufacturer=Object.values(vehicle_result)
-    var manufacturer_f=vehicle_fatalities_result.map(t=>t.VMAKE)
-    var deaths_by_manufacturer=vehicle_fatalities_result.map(t=>t.FATALS)
+    function sortProperties(obj)
+    {
+    // convert object into array
+    var sortable=[];
+    for(var key in obj)
+        if(obj.hasOwnProperty(key))
+            sortable.push([key, obj[key]]); // each item is an array in format [key, value]
+    
+    // sort items by value
+    sortable.sort(function(a, b)
+    {
+    return b[1]-a[1]; // compare numbers
+    });
+    return sortable; // array in format [ [ key1, val1 ], [ key2, val2 ], ... ]
+    }
+    
+    var sortedMake=sortProperties(vehicle_result)
+    var sliced=sortedMake.slice(0,20)
+    console.log(sliced)
+
+    function objectify(array) {
+        return array.reduce(function(p, c) {
+            p[c[0]] = c[1];
+            return p;
+        }, {});
+    }
+
+    var top_ten=objectify(sliced)
+    console.log(top_ten)
+
+
+    var manufacturer_c=Object.keys(top_ten)
+    var crashes_by_manufacturer=Object.values(top_ten)
+
 
     var data = [{
     type: 'bar',
     x: crashes_by_manufacturer,
     y: manufacturer_c,
-    orientation: 'h'
+    orientation: 'h',
+    transforms: [{
+                type: 'sort',
+                target: 'x',
+                order: 'ascending'
+            }]
     }];
 
     var layout = {
+       
+        autosize: true,
         autosize: true,
         width: 450,
         height: 500,

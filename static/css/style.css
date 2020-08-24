@@ -4,6 +4,7 @@ body{
 }
 
 .page-header{
+    margin-left:20px;
     margin-top:50px;
 }
 
@@ -24,9 +25,6 @@ hr{
     height:500px;
 
 }
-
-
-
 
 #card-group{
     display: flex;

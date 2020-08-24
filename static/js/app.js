@@ -22,10 +22,10 @@ d3.json(accidents).then((data)=>{
                     coloraxis: 'coloraxis',hoverinfo: 'skip',radius:5}];
 
     var layout = {
-    mapbox: {center: {lon: -90, lat: 37}, style: 'stamen-terrain', zoom: 3},
+    mapbox: {center: {lon: -95, lat: 37}, style: 'stamen-terrain', zoom: 3},
     coloraxis: {colorscale: "Viridis"}, 
     title: {text: "Heat Map of Vehicle Fatalities in the United States"},
-    width: 900, height: 400, margin: {t: 30, b: 0}};
+    width: 925, height: 400, margin: {l:20, t: 20, b: 20}};
 
     Plotly.newPlot('myMap', mapdata, layout);
   
@@ -73,7 +73,7 @@ d3.json(accidents).then((data)=>{
     console.log(result3)
     var month_t=Object.keys(result3)
     var count_crashes_month=Object.values(result3)
-
+    console.log(day_t)
 
     var data_hour = {
         type: 'bar',
@@ -100,6 +100,7 @@ d3.json(accidents).then((data)=>{
     };
 
     var time_plots=[data_hour,data_day,data_month];
+
 
 
     var updatemenus=[{
@@ -134,19 +135,15 @@ d3.json(accidents).then((data)=>{
 
     var layout = {
         updatemenus: updatemenus,
-        // xaxis: {title:"Hour of the day",
-        //     size: 14,
-        //     autotick: false,
-        //     //ticks: 'outside',
-        //     tick0: 0,
-        //     dtick: 1,
-        //     //ticklen: 8,
-        //     tickwidth: 2,
-        //     tickangle: 45,
-        //     tickcolor: '#000'},
-        // yaxis: {title:"Total crashes",automargin: true,},
+        xaxis: {//title:"Hour of the day",
+            autotick: false,
+            tickangle: 45,
+            tickcolor: '#000',
+            tickfont: {size: 12}
+            },
+        yaxis: {title:"Total crashes",automargin: true,},
         autosize: true,
-        width: 500,
+        width: 450,
         height: 500,
         margin: {
             l: 100,
@@ -398,8 +395,65 @@ d3.json(accidents).then((data)=>{
 
     var layout = {barmode: 'group',
         updatemenus: updatemenus,
+        xaxis: {
+            autotick: false,
+            tickangle: 45,
+            tickcolor: '#000'},
         autosize: true,
-        width: 500,
+        width: 450,
+        height: 500,
+        automargin:true,
+        margin: {
+            l: 100,
+            r: 50,
+            b: 150,
+            t: 50,
+            pad: 4
+        }
+    };
+
+    var config = {responsive: true}           
+   
+
+    var config = {responsive: true};
+    Plotly.newPlot('light-weather', env_plots, layout,config);
+
+
+    ///////////    Vehicle make    //////////
+    var vehicle_crashes=data.map(t=>t.VMAKE)
+    var vehicle_result = { };
+    for(var i = 0; i < vehicle_crashes.length; ++i) {
+        if(!vehicle_result[vehicle_crashes[i]])
+            vehicle_result[vehicle_crashes[i]] = 0;
+        ++vehicle_result[vehicle_crashes[i]];
+    }
+
+    // Count of fatalities by weather conditions
+     var vehicle_fatalities_result = [];
+    data.reduce(function(res, value) {
+    if (!res[value.VMAKE]) {
+        res[value.VMAKE] = { VEHICLE_MAKE: value.VMAKE, FATALS: 0 };
+        weather_fatalities_result.push(res[value.VMAKE])
+    }
+    res[value.VMAKE].FATALS += value.FATALS;
+    return res;
+    }, {});
+
+    var manufacturer_c=Object.keys(vehicle_result)
+    var crashes_by_manufacturer=Object.values(vehicle_result)
+    var manufacturer_f=vehicle_fatalities_result.map(t=>t.VMAKE)
+    var deaths_by_manufacturer=vehicle_fatalities_result.map(t=>t.FATALS)
+
+    var data = [{
+    type: 'bar',
+    x: crashes_by_manufacturer,
+    y: manufacturer_c,
+    orientation: 'h'
+    }];
+
+    var layout = {
+        autosize: true,
+        width: 450,
         height: 500,
         margin: {
             l: 100,
@@ -410,26 +464,9 @@ d3.json(accidents).then((data)=>{
         }
     };
 
-    var config = {responsive: true}           
-   
+    var config = {responsive: true}  
 
-    
-    // var layout = {barmode: 'group',
-    //     title: 'Weather conditions',
-    //       updatemenus: updatemenus,
-    //     autosize: true,
-    //     width: 500,
-    //     height: 500,
-    //     margin: {
-    //         l: 100,
-    //         r: 50,
-    //         b: 100,
-    //         t: 100,
-    //         pad: 4
-    //     }
-    // };
-    var config = {responsive: true};
-    Plotly.newPlot('light', env_plots, layout,config);
+    Plotly.newPlot('make', data,layout,config);
 
 
   

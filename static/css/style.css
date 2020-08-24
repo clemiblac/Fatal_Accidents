@@ -3,14 +3,27 @@ body{
     font-family:  Arial, sans-serif;
 }
 
-
-#myMap{
-    margin-top:20px;
-    margin-bottom:15px;
-    width: 95%;
-    height: 95%;
+.page-header{
+    margin-top:50px;
 }
 
+.chart-title{
+    margin-left:20px;
+    margin-top:30px;
+}
+hr{
+    margin-left:20px;
+    margin-right:20px;
+}
+
+#myMap{
+    margin-bottom:15px;
+}
+#gender-age{
+    width:450px;
+    height:500px;
+
+}
 
 
 

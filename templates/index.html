@@ -38,7 +38,7 @@
 
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
                 <a class="navbar-brand" href="#">
-                <img src="{{ url_for('static', filename='crash.png') }}" width='50' height='50'> Fatal Car Accidents</a>
+                <img src="{{ url_for('static', filename='crash.png') }}" width='50' height='50'> Fatal Car Accidents (2018)</a>
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -55,6 +55,7 @@
         <div class="container">
 
             <!--First Row-->
+            <h4 class="page-header">Heatmap of Vehicle Fatalities in the United States</h4><hr>
             <div class="row">
                 <div class="col" id="myMap"></div>
             </div>
@@ -62,15 +63,27 @@
 
             <!-- Second Row-->
             <div class="row">
-                <div class="col" id="time-of-day"></div>
-                <div class="col" id="gender-age" >Biological</div>
+                <div>
+                    <h4 class="chart-title">Total Crashes by Time</h4><hr>
+                    <div class="col" id="time-of-day"></div>
+                </div>
+                <div>
+                    <h4 class="chart-title">Total Crashes by Sex and Age</h4><hr>
+                    <div class="col" id="gender-age" ></div>
+                </div>
             </div>
             <!--End of Second Row -->
 
             <!-- Third Row -->
             <div class="row">
-                <div class="col" id="light-weather">Environmental</div>
-                <div class="col" id="make">Vehicle</div>
+                <div>
+                    <h4 class="chart-title">Total Crashes by Light and Weather</h4><hr>
+                    <div class="col" id="light-weather"></div>
+                </div>
+                <div>
+                    <h4 class="chart-title">Total Crashes by Vehicle Manufacturer</h4><hr>
+                    <div class="col" id="make"></div>
+                </div>
             </div>
             <!--End of Third Row-->
 

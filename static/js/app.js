@@ -17,17 +17,23 @@ d3.json(accidents).then((data)=>{
     var longitude=coordinates2.map(t=>t.LONGITUD)
     var fatalities=coordinates2.map(t=>t.FATALS)
 
-
+    
     var mapdata = [{type: 'densitymapbox', lon: longitude, lat:latitude, z:fatalities,
                     coloraxis: 'coloraxis',hoverinfo: 'skip',radius:5}];
 
+   
     var layout = {
     mapbox: {center: {lon: -95, lat: 37}, style: 'stamen-terrain', zoom: 3},
-    coloraxis: {colorscale: "Viridis"}, 
-    title: {text: "Heat Map of Vehicle Fatalities in the United States"},
+    coloraxis: {colorscale: "YlOrRd"}, 
     width: 925, height: 400, margin: {l:20, t: 20, b: 20}};
 
     Plotly.newPlot('myMap', mapdata, layout);
+
+    //"open-street-map", "carto-positron", "carto-darkmatter", "stamen-terrain",
+    // "stamen-toner"  yeild maps composed of raster tiles
+    //from various public tile servers which do not require signups or access tokens
+
+   
   
    ///////////////                   TIME FACTORS                    //////////
 
@@ -204,7 +210,7 @@ d3.json(accidents).then((data)=>{
         debug: true, 
         type: 'horizontal column', 
         title_label_text: 
-          'distibution of accidents by sex and age', 
+          '  ', 
         yAxis: { 
           scale_type: 'stacked', 
           defaultTick_label_text: 

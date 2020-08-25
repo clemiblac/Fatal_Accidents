@@ -25,6 +25,9 @@ hr{
     height:500px;
 
 }
+#footnote{
+    font-size:10px
+}
 
 #card-group{
     display: flex;

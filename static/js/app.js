@@ -85,7 +85,7 @@ d3.json(accidents).then((data)=>{
         type: 'bar',
         x: hour_t,
         y: count_crashes_time,
-        marker:{color:'#cefa87'},
+        marker:{color:'#ff00d2'},
         visible:true
     };
 
@@ -93,7 +93,7 @@ d3.json(accidents).then((data)=>{
         type:'bar',
         x:day_t,
         y:count_crashes_day,
-        marker:{color:'#87cefa'},
+        marker:{color:'#00d2ff'},
         visible:false
     };
 
@@ -101,7 +101,7 @@ d3.json(accidents).then((data)=>{
         type:'bar',
         x:month_t,
         y:count_crashes_month,
-        marker:{color:'#FA8795'},
+        marker:{color:'#00ff2d'},
         visible:false
     };
 
@@ -338,7 +338,7 @@ d3.json(accidents).then((data)=>{
         y: l_count_crashes,
         name: 'crashes (light)',
         type: 'bar',
-        marker:{color:'#87fab3'},
+        marker:{color:'#00d2ff'},
         visible:true
     };
     
@@ -347,7 +347,7 @@ d3.json(accidents).then((data)=>{
         y: l_count_deaths,
         name: 'fatalities (light)',
         type: 'bar',
-        marker:{color:'#87cefa'},
+        marker:{color:'#FF2D00'},
         visible:true
     };
 
@@ -356,7 +356,7 @@ d3.json(accidents).then((data)=>{
         y: w_count_crashes,
         name: 'crashes (weather)',
         type: 'bar',
-        marker:{color:'#fa87ce'},
+        marker:{color:'#00d2ff'},
         visible:false
     };
 
@@ -365,7 +365,7 @@ d3.json(accidents).then((data)=>{
         y: w_count_deaths,
         name: 'fatalities (weather)',
         type: 'bar',
-        marker:{color:'#fab387'},
+        marker:{color:'#FF2D00'},
         visible:false
     };
     
@@ -425,82 +425,50 @@ d3.json(accidents).then((data)=>{
     Plotly.newPlot('light-weather', env_plots, layout,config);
 
 
-    ///////////    Vehicle make    //////////
-    var vehicle_crashes=data.map(t=>t.VMAKE)
-    var vehicle_result = { };
-    for(var i = 0; i < vehicle_crashes.length; ++i) {
-        if(!vehicle_result[vehicle_crashes[i]])
-            vehicle_result[vehicle_crashes[i]] = 0;
-        ++vehicle_result[vehicle_crashes[i]];
+    /// Count crashes by Road Type
+    var route_type=data.map(t=>t.ROUTE_NAME)
+    var route_result = { };
+    for(var i = 0; i < route_type.length; ++i) {
+        if(!route_result[route_type[i]])
+            route_result[route_type[i]] = 0;
+        ++route_result[route_type[i]];
     }
 
-    console.log(vehicle_result)
+    console.log(route_result)
 
-    function sortProperties(obj)
-    {
-    // convert object into array
-    var sortable=[];
-    for(var key in obj)
-        if(obj.hasOwnProperty(key))
-            sortable.push([key, obj[key]]); // each item is an array in format [key, value]
-    
-    // sort items by value
-    sortable.sort(function(a, b)
-    {
-    return b[1]-a[1]; // compare numbers
-    });
-    return sortable; // array in format [ [ key1, val1 ], [ key2, val2 ], ... ]
-    }
-    
-    var sortedMake=sortProperties(vehicle_result)
-    var sliced=sortedMake.slice(0,20)
-    console.log(sliced)
+    var route=Object.keys(route_result)
+    var route_crashes=Object.values(route_result)
 
-    function objectify(array) {
-        return array.reduce(function(p, c) {
-            p[c[0]] = c[1];
-            return p;
-        }, {});
-    }
-
-    var top_ten=objectify(sliced)
-    console.log(top_ten)
-
-
-    var manufacturer_c=Object.keys(top_ten)
-    var crashes_by_manufacturer=Object.values(top_ten)
-
-
-    var data = [{
-    type: 'bar',
-    x: crashes_by_manufacturer,
-    y: manufacturer_c,
-    orientation: 'h',
-    transforms: [{
-                type: 'sort',
-                target: 'x',
-                order: 'ascending'
-            }]
+    var bar_data = [{
+        type: 'bar',
+        x: route_crashes,
+        y: route,
+        orientation: 'h',
+        marker:{color:'#00D2FF'},
+        transforms: [{
+            type: 'sort',
+            target: 'x',
+            order: 'ascending'
+        }]
     }];
 
+
     var layout = {
-       
-        autosize: true,
         autosize: true,
         width: 450,
         height: 500,
+        automargin:true,
         margin: {
-            l: 100,
+            l: 200,
             r: 50,
             b: 50,
             t: 50,
             pad: 4
         }
     };
+    var config = {responsive: true}; 
 
-    var config = {responsive: true}  
-
-    Plotly.newPlot('make', data,layout,config);
+    Plotly.newPlot('route', bar_data,layout,config);
 
 
   

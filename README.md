@@ -3,10 +3,10 @@
 ##### The ultimate outcome of this project is to either apply linear regression for predicition purposes or neural networks
 
 #### This heatmap shows the accident hotspots in the united states for the year 2018
-![](map.png)
+![Map](Fatal_Accidents/graphs1.PNG)
 
 #### The digrams below explore the time and biological varables related to crash occurence
-![](graphs1.png)
+![time, age and sex](graphs1.png)
 
-### The digrams below explore the physical/ environemtal variables as they relate to crashes and fatalities
-![](graphs2.png)
+#### The digrams below explore the physical/ environmental variables as they relate to crashes and fatalities
+![weather, light and road type](graphs2.png)

@@ -26,10 +26,10 @@
         <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/css/mdb.min.css" rel="stylesheet">
             
         <!--MODIFIED THE HREF FOR THE CSS FILE-->
-        <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+        <link rel="stylesheet" href="../static/css/style.css">
 
         <title>Fatal Accidents Dashboard</title>
-        <link rel="shortcut icon" type="image/x-icon" href="{{ url_for('static', filename='crash.png') }}">
+        <link rel="shortcut icon" type="image/x-icon" href="../static/crash.png">
     </head>
 
     
@@ -38,7 +38,7 @@
 
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
                 <a class="navbar-brand" href="#">
-                <img src="{{ url_for('static', filename='crash.png') }}" width='50' height='50'> Fatal Car Accidents (2018)</a>
+                <img src="../static/crash.png" width='50' height='50'> Fatal Car Accidents (2018)</a>
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>

@@ -2,6 +2,7 @@
 import pandas as pd
 import json
 import os
+from datetime import datetime
 
 from pymongo import MongoClient
 
@@ -70,23 +71,49 @@ def about():
 @app.route("/data/fatal")
 #@cache.cached(timeout=18000)
 def fatal():
+
+    print(f'{datetime.now()}: connecting to db')
     db = client['fatal_db']
+
+    print(f'{datetime.now()}: querying collection')
     collection= db['accident_data']
     documents=collection.find()
-    df =  pd.DataFrame(list(documents))
-    df_json = df.to_json(default_handler=str,orient='records')
+
+    docs = []
+    
+    for d in documents:
+        docs.append(d)
+        print(len(docs))
+
+
+
+    print(f'{datetime.now()}: converting doc cursor to list')
+    doc_list = list(documents)
+
+    print(f'{len(doc_list)} records found')
+
+    print(doc_list[0])
+
+    #print(f'{datetime.now()}: creating df')
+    #df =  pd.DataFrame(list(documents))
+
+    #print(len(df))
+
+    #print(f'{datetime.now()}: converting df')
+    #df_json = df.to_json(default_handler=str,orient='records')
     
     client.close()
 
-    return df_json
+    return jsonify(doc_list)
+    #return df_json
 
 
 
-#@app.route("/api_get_key")
+@app.route("/api_get_key")
 #@cache.cached()
-#def key():
+def key():
 
-    #return json.dumps({"key":API_Key})
+    return json.dumps({"key":API_Key})
 
 
 if __name__ == "__main__":

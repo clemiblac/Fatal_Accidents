@@ -1,7 +1,7 @@
 
 
 /// route name
-var accidents="static/js/fatal_accidents.json";
+var accidents="../static/js/fatal_accidents.json";
 //var accidents="/data/fatal";
 
 d3.json(accidents).then((data)=>{

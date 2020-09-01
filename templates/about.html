@@ -8,30 +8,71 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+    <!-- Google Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+    <!-- Bootstrap core CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Material Design Bootstrap -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/css/mdb.min.css" rel="stylesheet">
+        
+    <!--MODIFIED THE HREF FOR THE CSS FILE-->
+    <link rel="stylesheet" href="../static/css/style.css">
+        
     <title>Fatal Accidents Dashboard</title>
     <link rel="shortcut icon" type="image/x-icon" href="{{ url_for('static', filename='crash.png') }}">
   </head>
 
   <body>
-
+    
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">
-        <img src="{{ url_for('static', filename='crash.png') }}" width='50' height='50'> Fatal Car Accidents</a>
+      <a class="navbar-brand" href="#">
+      <img src="../static/crash.png" width='50' height='50'> Fatal Car Accidents (2018)</a>
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+          <div class="navbar-nav ml-auto">
+              <a class="nav-item nav-link" href="/"><h5>Home</h5></a>
+              <!--<a class="nav-item nav-link" href="/predictions"><h5>Predictions</h5></a>-->
+              <a class="nav-item nav-link active" href="about.html"><h5>About</h5><span class="sr-only">(current)</span></a>
+          </div>
+      </div>
+</nav>
+  <div class="container">
+  
+    <div>
+      <h4>About the Author</h4>
+      <p>This dashboard was created by Clementine Sraha. Clementine is Data Analyst with a B.Sc. in Environmental Science from 
+        Drexel University and a Masters Degree in Environmental Management from the Nicholas School of Environment at Duke 
+        University. Clementine loves coding and likes to learn new things in her free time.The languages used in the creation
+        of this dashboard are Python,JavaScript, HTML and CSS. <br>
+        
+        You can view Clementine's linkedIn Profile here
+        <a href="https://www.linkedin.com/in/clementine-sraha/">
+          <img  alt="clemiblac | LinkedIn" width="20px" src="https://cdn.jsdelivr.net/npm/simple-icons@v3/icons/linkedin.svg" />
         </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-            <div class="navbar-nav ml-auto">
-                <a class="nav-item nav-link active" href="/"><h5>Home</h5> 
-                <a class="nav-item nav-link" href="/predictions"><h5>Predictions</h5></a>
-                <a class="nav-item nav-link" href="/about"><h5>About</h5></a><span class="sr-only">(current)</span></a>
-            </div>
-        </div>
-    </nav>
+
+      </p>
+    </div>
+
+    <div>
+      <h4>Sources:</h4>
+      <p>
+        <li> Center for Statistics and Analysis. (2019, September). Fatality Analysis Reporting System (FARS) Analytical User’s
+         Manual, 1975-2018 (Report No. DOT HS 812 827). Washington, DC: National Highway Traffic Safety Administration.
+        </li>
+        <li> National Highway Traffic Safety Administration. (2020, August 15). FTP Access. Retrieved from National Highway Traffic
+           Safety Administration Website: https://www.nhtsa.gov/content/nhtsa-ftp/176776
+        </li>
+      </p>
+    </div>
+  </div>
    
-    <p>Hello About Page</p>
-    Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>
+    
+    
 
     
     <!-- Optional JavaScript -->
@@ -40,4 +81,13 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
   </body>
+      <!-- Start of footer -->
+      <footer class="footer navbar-fixed-bottom">
+        <div class="two-toned-footer-color"></div>
+        <p class="text-muted text-muted-footer text-center">
+          Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>
+            <br><br>
+        </p>
+    </footer>
+    <!-- End of footer -->  
 </html>

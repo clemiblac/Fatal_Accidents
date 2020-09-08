@@ -25,7 +25,7 @@ d3.json(accidents).then((data)=>{
     var layout = {
     mapbox: {center: {lon: -95, lat: 37}, style: 'stamen-terrain', zoom: 3},
     coloraxis: {colorscale: "YlOrRd"}, 
-    width: 925, height: 400, margin: {l:20, t: 20, b: 20}};
+    width: 1400, height: 500, margin: {l:20, t: 20, b: 20}};
 
     Plotly.newPlot('myMap', mapdata, layout);
 
@@ -149,8 +149,6 @@ d3.json(accidents).then((data)=>{
             },
         yaxis: {title:"Total crashes",automargin: true,},
         autosize: true,
-        width: 450,
-        height: 500,
         margin: {
             l: 100,
             r: 50,
@@ -406,8 +404,6 @@ d3.json(accidents).then((data)=>{
             tickangle: 45,
             tickcolor: '#000'},
         autosize: true,
-        width: 450,
-        height: 500,
         automargin:true,
         margin: {
             l: 100,
@@ -455,8 +451,6 @@ d3.json(accidents).then((data)=>{
 
     var layout = {
         autosize: true,
-        width: 450,
-        height: 500,
         automargin:true,
         margin: {
             l: 200,

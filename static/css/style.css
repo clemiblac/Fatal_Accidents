@@ -16,14 +16,51 @@ hr{
     margin-left:20px;
     margin-right:20px;
 }
-
-#myMap{
-    margin-bottom:15px;
+#bio{
+    margin-top: 50px;
+    padding-left:20px;
+    padding-right:20px;
+    padding-top:20px;
+    padding-bottom:30px;
 }
-#gender-age{
-    width:450px;
-    height:500px;
 
+#sources{
+    margin-top:50px;
+    
+    padding-top:20px;
+    padding-left:20px;
+    width:1450px;
+    height:200px;
+}
+
+#time-of-day{
+    width:720px;
+    height:500px;
+    margin-right:5px;
+    margin-left:5px;
+}
+
+#gender-age{
+    width:720px;
+    height:500px;
+    margin-right:5px;
+    margin-left:5px;
+
+}
+
+
+#light-weather{
+    width:720px;
+    height:500px;
+    margin-right:5px;
+    margin-left:5px;
+}
+
+#route{
+    width:720px;
+    height:500px;
+    margin-right:5px;
+    margin-left:5px;
 }
 #footnote{
     font-size:10px

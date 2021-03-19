@@ -1,6 +1,7 @@
 # Fatal_Accidents
 #### This project explores a number of variables and their possible  effect on crash occurence and accident fatality
-#### The ultimate outcome of this project is to either apply linear regression for predicition purposes or neural networks
+#### visit tableau dashboard here
+https://public.tableau.com/profile/clementine.sraha#!/vizhome/Exploring2018accidentdataintheU_S/Dashboard1
 
 ##### This heatmap shows the accident hotspots in the united states for the year 2018
 ![Map](https://github.com/clemiblac/Fatal_Accidents/blob/master/map.PNG)
